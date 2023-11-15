@@ -5,8 +5,8 @@
 // @author       NvlblNm
 // @match        https://wayfarer.nianticlabs.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=nianticlabs.com
-// @downloadURL  https://github.com/NvlblNm/wayfarer-onboarding-showcase/raw/main/onboarding-showcase.js
-// @updateURL    https://github.com/NvlblNm/wayfarer-onboarding-showcase/raw/main/onboarding-showcase.js
+// @downloadURL  https://github.com/NvlblNm/wayfarer-onboarding-showcase/raw/main/onboarding-showcase.user.js
+// @updateURL    https://github.com/NvlblNm/wayfarer-onboarding-showcase/raw/main/onboarding-showcase.user.js
 // @grant        none
 // ==/UserScript==
 (function() {
