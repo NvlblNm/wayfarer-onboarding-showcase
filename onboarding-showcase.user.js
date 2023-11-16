@@ -73,6 +73,7 @@
                         classes: 'flex flex-col self-start space-y-2 w-full mb-2',
                         parent: flexCol2,
                     });
+                    showcaseEl.style = 'max-width: 512px;';
                     createEl({
                         type: 'h4',
                         text: showcase.title,
