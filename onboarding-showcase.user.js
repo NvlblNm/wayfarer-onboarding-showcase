@@ -102,11 +102,18 @@
                             parent: showcaseEl,
                         });
                     }
-                    const showcaseImg = createEl({
-                        type: 'img',
+                    const imgLink = createEl({
+                        type: 'a',
                         parent: showcaseEl,
                     });
+                    imgLink.href = showcase.imageUrl + '=s0';
+                    imgLink.target = '_blank';
+                    const showcaseImg = createEl({
+                        type: 'img',
+                        parent: imgLink,
+                    });
                     showcaseImg.src = showcase.imageUrl;
+                    showcaseImg.width = 512;
                 });
                 const onboarding = document.getElementsByTagName('app-onboarding-content')[0];
                 onboarding.replaceChildren(
