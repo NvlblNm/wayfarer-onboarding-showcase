@@ -26,46 +26,53 @@
         return el;
     }
     const replaceOnboarding = () => {
+        const showcaseWrapper = createEl({
+            type: 'div',
+            classes: 'mat-dialog-content absolute inset-x-0 bottom-4 top-header m-0 p-0 overflow-hidden flex ng-star-inserted',
+        });
+
+        const onboarding = document.getElementsByTagName('app-onboarding-content')[0];
+        onboarding.replaceChildren(
+            onboarding.children[0],
+            showcaseWrapper,
+        );
+        const showcaseContainer = createEl({
+            type: 'div',
+            classes: 'onboarding-content-container p-4 overflow-y-auto w-full h-full',
+            parent: showcaseWrapper,
+        });
+        const flexCol = createEl({
+            type: 'div',
+            classes: 'flex flex-col h-full ng-star-inserted',
+            parent: showcaseContainer,
+        });
+        const flexRow = createEl({
+            type: 'div',
+            classes: 'flex flex-row justify-center h-full',
+            parent: flexCol,
+        });
+        const flexCol2 = createEl({
+            type: 'div',
+            classes: 'flex flex-col self-start space-y-2 w-full mb-2',
+            parent: flexRow,
+        });
+        createEl({
+            type: 'h2',
+            text: 'Welcome to Shitty Showcase!',
+            parent: flexCol2,
+        });
+        const linky = createEl({
+            type: 'a',
+            text: 'idgaf, take me to my noms!',
+            parent: flexCol2,
+        });
+        linky.href = '/new/nominations';
+
         const xhr = new XMLHttpRequest();
         xhr.open('GET', '/api/v1/vault/home', true);
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4) {
                 const showcases = JSON.parse(xhr.response).result.showcase;
-                const showcaseWrapper = createEl({
-                    type: 'div',
-                    classes: 'mat-dialog-content absolute inset-x-0 bottom-4 top-header m-0 p-0 overflow-hidden flex ng-star-inserted',
-                });
-                const showcaseContainer = createEl({
-                    type: 'div',
-                    classes: 'onboarding-content-container p-4 overflow-y-auto w-full h-full',
-                    parent: showcaseWrapper,
-                });
-                const flexCol = createEl({
-                    type: 'div',
-                    classes: 'flex flex-col h-full ng-star-inserted',
-                    parent: showcaseContainer,
-                });
-                const flexRow = createEl({
-                    type: 'div',
-                    classes: 'flex flex-row justify-center h-full',
-                    parent: flexCol,
-                });
-                const flexCol2 = createEl({
-                    type: 'div',
-                    classes: 'flex flex-col self-start space-y-2 w-full mb-2',
-                    parent: flexRow,
-                });
-                createEl({
-                    type: 'h2',
-                    text: 'Welcome to Shitty Showcase!',
-                    parent: flexCol2,
-                });
-                const linky = createEl({
-                    type: 'a',
-                    text: 'idgaf, take me to my noms!',
-                    parent: flexCol2,
-                });
-                linky.href = '/new/nominations';
 
                 showcases.forEach(showcase => {
                     const showcaseEl = createEl({
@@ -116,11 +123,6 @@
                     showcaseImg.src = showcase.imageUrl;
                     showcaseImg.width = 512;
                 });
-                const onboarding = document.getElementsByTagName('app-onboarding-content')[0];
-                onboarding.replaceChildren(
-                    onboarding.children[0],
-                    showcaseWrapper,
-                );
             }
         }
         xhr.send();
