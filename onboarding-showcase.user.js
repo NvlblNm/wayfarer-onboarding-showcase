@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Wayfarer Shitty Showcase Without Onboarding
-// @version      0.1
+// @version      0.1.1
 // @description  Renders something akin to a showcase
 // @author       NvlblNm
 // @match        https://wayfarer.nianticlabs.com/*
@@ -51,11 +51,13 @@
             classes: 'flex flex-row justify-center h-full',
             parent: flexCol,
         });
+        flexRow.style = 'max-width: 512px;';
         const flexCol2 = createEl({
             type: 'div',
             classes: 'flex flex-col self-start space-y-2 w-full mb-2',
             parent: flexRow,
         });
+
         createEl({
             type: 'h2',
             text: 'Welcome to Shitty Showcase!',
@@ -72,7 +74,26 @@
         xhr.open('GET', '/api/v1/vault/home', true);
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4) {
-                const showcases = JSON.parse(xhr.response).result.showcase;
+                const result = JSON.parse(xhr.response).result;
+                const campaign = result.campaignProgress;
+                const showcases = result.showcase;
+
+                if (campaign) {
+                    if (campaign.userCampaignProgress !== undefined && campaign.communityCampaignProgress !== undefined) {
+                        createEl({
+                            type: 'h3',
+                            text: "Something's happening and you probably can't participate! User: " + campaign.userCampaignProgress +
+                                ' Community: ' + campaign.communityCampaignProgress,
+                            parent: flexCol2,
+                        });
+                    } else {
+                        createEl({
+                            type: 'h3',
+                            text: JSON.stringify(campaign),
+                            parent: flexCol2,
+                        });
+                    }
+                }
 
                 showcases.forEach(showcase => {
                     const showcaseEl = createEl({
@@ -80,7 +101,6 @@
                         classes: 'flex flex-col self-start space-y-2 w-full mb-2',
                         parent: flexCol2,
                     });
-                    showcaseEl.style = 'max-width: 512px;';
                     createEl({
                         type: 'h4',
                         text: showcase.title,
