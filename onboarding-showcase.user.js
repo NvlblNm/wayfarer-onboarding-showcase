@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Wayfarer Shitty Showcase Without Onboarding
-// @version      0.1.1
+// @version      0.1.2
 // @description  Renders something akin to a showcase
 // @author       NvlblNm
 // @match        https://wayfarer.nianticlabs.com/*
@@ -79,7 +79,7 @@
                 const showcases = result.showcase;
 
                 if (campaign) {
-                    if (campaign.userCampaignProgress !== undefined && campaign.communityCampaignProgress !== undefined) {
+                    if (campaign.userCampaignProgress !== undefined && campaign.communityCampaignProgress !== undefined && campaign.communityCampaignProgress) {
                         createEl({
                             type: 'h3',
                             text: "Something's happening and you probably can't participate! User: " + campaign.userCampaignProgress +
