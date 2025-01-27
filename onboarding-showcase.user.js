@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Wayfarer Shitty Showcase Without Onboarding
-// @version      0.1.4
+// @version      0.1.5
 // @description  Renders something akin to a showcase
 // @author       NvlblNm
 // @match        https://wayfarer.nianticlabs.com/*
@@ -96,7 +96,7 @@
                         type: 'h3',
                         parent: flexCol2,
                     });
-                    messageEl._innerHTML = message;
+                    messageEl.innerHTML = message;
                 }
 
                 if (punishmentWarn) {
