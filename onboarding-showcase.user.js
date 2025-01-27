@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Wayfarer Shitty Showcase Without Onboarding
-// @version      0.1.3
+// @version      0.1.4
 // @description  Renders something akin to a showcase
 // @author       NvlblNm
 // @match        https://wayfarer.nianticlabs.com/*
@@ -76,6 +76,8 @@
             if (xhr.readyState == 4) {
                 const result = JSON.parse(xhr.response).result;
                 const campaign = result.campaignProgress;
+                const message = result.showcaseMessage;
+                const punishmentWarn = result.punishmentWarn;
                 const showcases = result.showcase;
 
                 if (campaign) {
@@ -87,6 +89,22 @@
                             parent: flexCol2,
                         });
                     }
+                }
+
+                if (message) {
+                    const messageEl = createEl({
+                        type: 'h3',
+                        parent: flexCol2,
+                    });
+                    messageEl._innerHTML = message;
+                }
+
+                if (punishmentWarn) {
+                    createEl({
+                        type: 'h3',
+                        text: 'Punishment Flag is TRUE!',
+                        parent: flexCol2,
+                    });
                 }
 
                 showcases.forEach(showcase => {
